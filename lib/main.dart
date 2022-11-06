@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testing_in_flutter/ui/news/bloc/news_bloc.dart';
+import 'package:testing_in_flutter/ui/news/news_page.dart';
 
-import 'news_change_notifier.dart';
-import 'news_page.dart';
-import 'news_service.dart';
+import 'data/repo/news_repo_impl.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'News App',
-      home: ChangeNotifierProvider(
-        create: (_) => NewsChangeNotifier(NewsService()),
+      home: BlocProvider(
+        create: (_) => NewsBloc(NewsRepoImpl()),
         child: const NewsPage(),
       ),
     );

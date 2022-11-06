@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:provider/provider.dart';
-import 'package:testing_in_flutter/article.dart';
-import 'package:testing_in_flutter/news_change_notifier.dart';
-import 'package:testing_in_flutter/news_page.dart';
-import 'package:testing_in_flutter/news_service.dart';
+import 'package:testing_in_flutter/data/repo/news_repo_impl.dart';
+import 'package:testing_in_flutter/domain/model/news_repo.dart';
+import 'package:testing_in_flutter/ui/news/bloc/news_bloc.dart';
+import 'package:testing_in_flutter/ui/news/model/article.dart';
+import 'package:testing_in_flutter/ui/news/news_page.dart';
 
-class MockNewsService extends Mock implements NewsService {}
+class MockNewsService extends Mock implements NewsRepo {}
 
 void main() {
   late MockNewsService mockNewsService;
@@ -40,8 +41,8 @@ void main() {
   Widget createWidgetUnderTest() {
     return MaterialApp(
       title: 'News App',
-      home: ChangeNotifierProvider(
-        create: (_) => NewsChangeNotifier(mockNewsService),
+      home: BlocProvider(
+        create: (_) => NewsBloc(NewsRepoImpl()),
         child: const NewsPage(),
       ),
     );
