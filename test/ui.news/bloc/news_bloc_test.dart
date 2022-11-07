@@ -34,12 +34,13 @@ void main() {
       'emits [NewsLoaded]',
       build: () {
         arrangeNewsServiceReturns3Articles();
-        return NewsBloc(mockNewsRepo);
+        return newsBloc;
       },
       act: (bloc) {
         newsBloc.add(const NewsFetchEvent());
       },
       expect: () => <NewsState>[
+        NewsLoading(),
         NewsLoaded(articlesFromService)
       ],
     );
