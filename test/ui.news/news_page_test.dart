@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:testing_in_flutter/data/repo/news_repo_impl.dart';
 import 'package:testing_in_flutter/domain/model/news_repo.dart';
 import 'package:testing_in_flutter/ui/news/bloc/news_bloc.dart';
 import 'package:testing_in_flutter/ui/news/model/article.dart';
@@ -42,7 +41,7 @@ void main() {
     return MaterialApp(
       title: 'News App',
       home: BlocProvider(
-        create: (_) => NewsBloc(NewsRepoImpl()),
+        create: (_) => NewsBloc(mockNewsService),
         child: const NewsPage(),
       ),
     );

@@ -31,7 +31,7 @@ void main() {
     }
 
     blocTest(
-      'emits [NewsLoaded]',
+      'emits [NewsLoading, NewsLoaded]',
       build: () {
         arrangeNewsServiceReturns3Articles();
         return newsBloc;
